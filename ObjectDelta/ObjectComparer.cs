@@ -10,6 +10,7 @@ namespace ObjectDelta
     public ObjectDelta<TObject> Compare<TObject>(TObject oldObj, TObject newObj) where TObject : class
     {
       var result = new List<PropertyDelta>();
+
       var properties = typeof(TObject).GetProperties().Where(x=> !x.GetCustomAttributes(typeof(NoComparableAttribute), true).Any());
 
       foreach (var propertyInfo in properties)
