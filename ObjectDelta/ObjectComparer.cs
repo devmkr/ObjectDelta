@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ObjectDelta
 {
@@ -13,7 +10,7 @@ namespace ObjectDelta
     public ObjectDelta<TObject> Compare<TObject>(TObject oldObj, TObject newObj) where TObject : class
     {
       var result = new List<PropertyDelta>();
-      var properties = typeof(TObject).GetProperties();
+      var properties = typeof(TObject).GetProperties().Where(x=> x.GetCustomAttributes(typeof(NoComparableAttribute), true).Any());
 
       foreach (var propertyInfo in properties)
       {
@@ -56,7 +53,9 @@ namespace ObjectDelta
     {
       if (type == typeof(string))
         return false;
-      return type.GetInterface(typeof(IEnumerable<>).FullName) != null || type.GetInterface(typeof(IEnumerable).FullName) != null;
+
+      return type.GetInterface(typeof(IEnumerable<>).FullName) != null ||
+             type.GetInterface(typeof(IEnumerable).FullName) != null;
     }
   }
 }
