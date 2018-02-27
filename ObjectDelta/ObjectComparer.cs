@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,7 +56,7 @@ namespace ObjectDelta
     {
       if (type == typeof(string))
         return false;
-      return type.GetInterface(typeof(IEnumerable<>).FullName) != null;
+      return type.GetInterface(typeof(IEnumerable<>).FullName) != null || type.GetInterface(typeof(IEnumerable).FullName) != null;
     }
   }
 }
