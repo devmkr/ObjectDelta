@@ -1,11 +1,28 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Linq;
 
 namespace ObjectDelta
 {
   public class PropertyDelta
   {
     public string Name { get; set; }
+
+    public string Display
+    {
+      get
+      {
+        var propertyInfo = DataType.GetProperty(Name);
+        if (propertyInfo == null)
+          return Name;
+        return ((DisplayNameAttribute)propertyInfo.GetCustomAttributes(typeof(DisplayNameAttribute), true)
+                 .FirstOrDefault())
+               ?.DisplayName ?? Name;
+      }
+    }
+
     public object Value { get; set; }
+
     public Type DataType { get; set; }
 
     protected bool Equals(PropertyDelta other)
