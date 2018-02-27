@@ -2,7 +2,7 @@
 
 namespace ObjectDelta.Test
 {
-  public class ExampleComplesClass : IEquatable<ExampleComplesClass>
+  public class ExampleComplexClass : IEquatable<ExampleComplexClass>
   {
     public int Id { get; set; }
     public string SerialNumber { get; set; }
@@ -16,7 +16,7 @@ namespace ObjectDelta.Test
     public int StateId { get; set; }
     public int? ShopId { get; set; }
 
-    public bool Equals(ExampleComplesClass other)
+    public bool Equals(ExampleComplexClass other)
     {
       if (ReferenceEquals(null, other)) return false;
       if (ReferenceEquals(this, other)) return true;
@@ -31,7 +31,7 @@ namespace ObjectDelta.Test
       if (ReferenceEquals(null, obj)) return false;
       if (ReferenceEquals(this, obj)) return true;
       if (obj.GetType() != GetType()) return false;
-      return Equals((ExampleComplesClass) obj);
+      return Equals((ExampleComplexClass) obj);
     }
 
     public override int GetHashCode()

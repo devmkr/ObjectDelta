@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace ObjectDelta
 {
@@ -18,7 +19,7 @@ namespace ObjectDelta
 
     protected bool Equals(ObjectDelta<TObject> other)
     {
-      return EqualityComparer<TObject>.Default.Equals(NewValue, other.NewValue) && Equals(Deltas, other.Deltas);
+      return EqualityComparer<TObject>.Default.Equals(NewValue, other.NewValue) && Deltas.OrderBy(t => t.Name).SequenceEqual(other.Deltas.OrderBy(t => t.Name));
     }
 
     public override int GetHashCode()

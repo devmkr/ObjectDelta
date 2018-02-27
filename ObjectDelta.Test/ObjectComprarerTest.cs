@@ -12,13 +12,13 @@ namespace ObjectDelta.Test
     public void Comparer_SameObjectsWithNoComplex_ReturnsNullDelta()
     {
       //arrange
-      var fstObject = new ExampleComplesClass
+      var fstObject = new ExampleComplexClass
       {
         CoverId = 2,
         IsDismounted = false,
         LightingId = 1
       };
-      var sndObject = new ExampleComplesClass
+      var sndObject = new ExampleComplexClass
       {
         CoverId = 2,
         IsDismounted = false,
@@ -35,32 +35,32 @@ namespace ObjectDelta.Test
     public void Comparer_DiffrentObjectsWithNoComplex_ReturnsDelta()
     {
       //arrange
-      var fstObject = new ExampleComplesClass
+      var fstObject = new ExampleComplexClass
       {
         CoverId = 1,
         IsDismounted = false,
         LightingId = 1
       };
-      var sndObject = new ExampleComplesClass
+      var sndObject = new ExampleComplexClass
       {
         CoverId = 2,
         IsDismounted = true,
         LightingId = 1
       };
 
-      var expected = new ObjectDelta<ExampleComplesClass>(sndObject, new List<PropertyDelta>
+      var expected = new ObjectDelta<ExampleComplexClass>(sndObject, new List<PropertyDelta>
       {
         new PropertyDelta
         {
           Value = false,
           DataType = typeof(bool),
-          Name = nameof(ExampleComplesClass.IsDismounted)
+          Name = nameof(ExampleComplexClass.IsDismounted)
         },
         new PropertyDelta
         {
           Value = 1,
           DataType = typeof(int?),
-          Name = nameof(ExampleComplesClass.CoverId)
+          Name = nameof(ExampleComplexClass.CoverId)
         }
       });
       //assert
@@ -78,14 +78,14 @@ namespace ObjectDelta.Test
     public void Calculate_EmptyDelta_ReturnsInput()
     {
       //arrange
-      var input = new ExampleComplesClass()
+      var input = new ExampleComplexClass()
       {
         CoverId = 2,
         IsDismounted = false,
         LightingId = 1
       };
       //act
-      var result = new ObjectComparer().Calculate(new ObjectDelta<ExampleComplesClass>(input, new List<PropertyDelta>()));
+      var result = new ObjectComparer().Calculate(new ObjectDelta<ExampleComplexClass>(input, new List<PropertyDelta>()));
       //assert
       Assert.IsNotNull(result);
       Assert.AreEqual(input, result);
@@ -95,30 +95,30 @@ namespace ObjectDelta.Test
     public void Calculate_DeltaWithProperties_ReturnsTransformedInput()
     {
       //arrange
-      var input = new ExampleComplesClass()
+      var input = new ExampleComplexClass()
       {
        TypeId = 1,
         CoverId = 4,
         SerialNumber = "!231"
       };
-      var delta = new ObjectDelta<ExampleComplesClass>(input, new List<PropertyDelta>()
+      var delta = new ObjectDelta<ExampleComplexClass>(input, new List<PropertyDelta>()
       {
         new PropertyDelta()
         {
           DataType = typeof(int?),
-          Name = nameof(ExampleComplesClass.CoverId),
+          Name = nameof(ExampleComplexClass.CoverId),
           Value = null,
 
         },
         new PropertyDelta()
         {
           DataType = typeof(int),
-          Name = nameof(ExampleComplesClass.TypeId),
+          Name = nameof(ExampleComplexClass.TypeId),
           Value = 3,
 
         }
       });
-      var expected = new ExampleComplesClass()
+      var expected = new ExampleComplexClass()
       {
         TypeId = 3,
         CoverId = null,

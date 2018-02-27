@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="ExampleObject.cs" />
     <Compile Include="ObjectComprarerTest.cs" />
+    <Compile Include="ObjectDeltaTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

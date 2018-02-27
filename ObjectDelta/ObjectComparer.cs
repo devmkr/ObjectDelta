@@ -52,6 +52,8 @@ namespace ObjectDelta
 
     private static bool IsPropertyCollection(Type type)
     {
+      if (type == typeof(string))
+        return false;
       return type.GetInterface(typeof(IEnumerable<>).FullName) != null;
     }
   }
